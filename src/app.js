@@ -4,11 +4,13 @@ const port = 3000;
 const router = require("./routes/index");
 const errorHandler = require("./middlewares/errorHandler");
 const swaggerUi = require("swagger-ui-express");
-const swaggerJson = require("./docs/swagger.json");
+const openapiJson = require("./docs/openapi.json");
 const morgan = require("morgan");
+const cors = require("cors");
 
+app.use(cors());
 app.use(morgan("short"));
-app.use("/apicdocs", swaggerUi.serve, swaggerUi.setup(swaggerJson));
+app.use("/apicdocs", swaggerUi.serve, swaggerUi.setup(openapiJson));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
